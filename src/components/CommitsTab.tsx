@@ -1,7 +1,6 @@
 // src/components/CommitsTab.tsx
 
 import {
-  Search,
   Filter,
   GitCommit,
   Plus,

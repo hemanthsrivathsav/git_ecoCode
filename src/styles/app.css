@@ -957,3 +957,66 @@ body {
 .eco-contrib-red-label {
   color: #dc2626;
 }
+
+
+/* Extra label colors */
+.eco-label--refactor {
+  background: rgba(20, 184, 166, 0.14);
+  color: #0f766e;
+}
+
+.eco-label--documentation {
+  background: rgba(22, 163, 74, 0.14);
+  color: #15803d;
+}
+
+/* Carbon impact summary block on the right */
+.eco-pr-carbon {
+  background: linear-gradient(
+    135deg,
+    rgba(240, 253, 244, 0.92),
+    rgba(224, 242, 254, 0.95)
+  );
+  border-radius: 12px;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  padding: 8px 12px;
+  min-width: 190px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.eco-pr-carbon-values {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #111827;
+}
+
+.eco-pr-carbon-values span {
+  white-space: nowrap;
+}
+
+.eco-pr-carbon-unit {
+  font-size: 11px;
+  color: #6b7280;
+  margin-left: 2px;
+}
+
+.eco-pr-carbon-change {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+}
+
+.eco-pr-carbon-change--down {
+  color: #16a34a; /* red for decrease */
+}
+
+.eco-pr-carbon-change--up {
+  color: #dc2626; /* green for increase */
+}
+
