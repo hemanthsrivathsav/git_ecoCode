@@ -828,3 +828,132 @@ body {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+
+/* ---------- Chart Tooltips ---------- */
+
+.eco-tooltip {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 8px 10px;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 12px 30px rgba(15, 118, 110, 0.18);
+  font-size: 12px;
+  color: var(--eco-gray-700);
+}
+
+.eco-tooltip-label {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.eco-tooltip-value {
+  font-size: 12px;
+}
+
+
+
+/* ---------- Chart tooltips ---------- */
+
+.eco-tooltip {
+  background: rgba(15, 23, 42, 0.96);
+  color: #e5e7eb;
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.6);
+}
+
+.eco-tooltip-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.eco-tooltip-body {
+  font-size: 12px;
+}
+
+.eco-tooltip-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.eco-tooltip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+}
+
+.eco-tooltip-label {
+  flex: 1;
+}
+
+.eco-tooltip-value {
+  font-weight: 500;
+}
+
+/* ---------- Top contributors green / red bar ---------- */
+
+.eco-contrib-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 13px;
+  padding: 8px 0;
+}
+
+.eco-contrib-info {
+  min-width: 120px;
+}
+
+.eco-contrib-name {
+  font-weight: 500;
+  display: block;
+}
+
+.eco-contrib-commits {
+  color: var(--eco-gray-500);
+  font-size: 12px;
+}
+
+.eco-contrib-bar-wrap {
+  flex: 1;
+}
+
+.eco-contrib-bar-bg {
+  position: relative;
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(226, 232, 240, 0.9);
+  overflow: hidden;
+  display: flex;
+}
+
+.eco-contrib-bar-green {
+  height: 100%;
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+
+.eco-contrib-bar-red {
+  height: 100%;
+  background: linear-gradient(90deg, #f97316, #ef4444);
+}
+
+.eco-contrib-bar-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+  font-size: 11px;
+}
+
+.eco-contrib-green-label {
+  color: #16a34a;
+}
+
+.eco-contrib-red-label {
+  color: #dc2626;
+}
