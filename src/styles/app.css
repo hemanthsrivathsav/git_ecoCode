@@ -1662,6 +1662,325 @@ body {
   color: #ffffff;
   background: linear-gradient(120deg, #22c55e, #14b8a6);
 }
+/* ---------- COMMIT DETAILS MODAL ---------- */
+
+.eco-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.35);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.eco-modal {
+  width: 100%;
+  max-width: 1120px;
+  height: 90vh;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #ecfdf5ee, #e0f2feee);
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 30px 80px rgba(15, 118, 110, 0.45);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.eco-modal-header {
+  padding: 16px 22px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.eco-modal-header h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.eco-modal-subtitle {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.eco-modal-close {
+  border: none;
+  border-radius: 999px;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(248, 250, 252, 0.9);
+  cursor: pointer;
+}
+
+/* body layout */
+
+.eco-modal-body {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.eco-modal-column {
+  flex: 1;
+  padding: 16px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow: hidden;
+}
+
+.eco-modal-section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.eco-modal-title-before {
+  font-size: 14px;
+  font-weight: 600;
+  color: #047857;
+}
+.eco-modal-title-after {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0f766e;
+}
+
+.eco-modal-hash {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 6px 16px rgba(148, 163, 184, 0.25);
+}
+
+.eco-modal-hash-before {
+  color: #b91c1c;
+}
+.eco-modal-hash-after {
+  color: #047857;
+}
+
+.eco-modal-divider {
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(45, 212, 191, 0.9),
+    transparent
+  );
+}
+
+/* code blocks */
+
+.eco-code-card {
+  border-radius: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  background: radial-gradient(circle at 0% 0%, #020617, #020617);
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.7);
+  overflow: hidden;
+  flex: 1;
+  min-height: 0;
+}
+
+.eco-code-scroll {
+  max-height: 350px;
+  overflow: auto;
+}
+
+.eco-code-pre {
+  margin: 0;
+  padding: 16px 18px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #e5e7eb;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+/* metrics */
+
+.eco-metrics {
+  margin-top: 6px;
+}
+
+.eco-metrics-label {
+  font-size: 13px;
+  color: #4b5563;
+  margin-bottom: 6px;
+}
+
+.eco-metrics-card {
+  border-radius: 16px;
+  padding: 14px 14px 12px;
+  box-shadow: 0 14px 35px rgba(148, 163, 184, 0.35);
+}
+
+.eco-metrics-card--before {
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(254, 202, 202, 0.9);
+}
+.eco-metrics-card--after {
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(187, 247, 208, 0.9);
+}
+
+.eco-metrics-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(248, 250, 252, 0.9);
+}
+
+.eco-metrics-main-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.eco-metrics-main-value--bad {
+  color: #b91c1c;
+}
+.eco-metrics-main-value--good {
+  color: #059669;
+}
+
+.eco-metrics-main-icon {
+  width: 20px;
+  height: 20px;
+}
+.eco-metrics-main-icon--bad {
+  color: #ef4444;
+}
+.eco-metrics-main-icon--good {
+  color: #10b981;
+}
+
+.eco-metrics-caption {
+  margin-top: 2px;
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.eco-metrics-chip {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.eco-metrics-chip--bad {
+  background: linear-gradient(135deg, #fee2e2, #fecaca);
+  color: #b91c1c;
+}
+.eco-metrics-chip--good {
+  background: linear-gradient(135deg, #bbf7d0, #a7f3d0);
+  color: #047857;
+}
+
+.eco-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.eco-metrics-mini {
+  border-radius: 10px;
+  padding: 8px 8px 6px;
+  font-size: 12px;
+}
+
+.eco-metrics-mini--warn {
+  background: linear-gradient(135deg, #fffbeb, #fef3c7);
+}
+.eco-metrics-mini--good {
+  background: linear-gradient(135deg, #ecfdf3, #dcfce7);
+}
+
+.eco-metrics-mini-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 4px;
+  font-size: 11px;
+  color: #92400e;
+}
+
+.eco-metrics-mini-icon {
+  width: 14px;
+  height: 14px;
+}
+.eco-metrics-mini-icon--warn {
+  color: #ea580c;
+}
+.eco-metrics-mini-icon--good {
+  color: #16a34a;
+}
+
+/* footer */
+
+.eco-modal-footer {
+  padding: 12px 20px 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.eco-modal-footer-label {
+  font-size: 13px;
+  color: #475569;
+}
+
+.eco-modal-footer-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  background: linear-gradient(120deg, #22c55e, #14b8a6);
+  color: #f9fafb;
+}
+
+/* responsive */
+
+@media (max-width: 900px) {
+  .eco-modal {
+    height: 92vh;
+  }
+  .eco-modal-body {
+    flex-direction: column;
+  }
+  .eco-modal-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(45, 212, 191, 0.9),
+      transparent
+    );
+  }
+}
 
 /* responsive modal */
 @media (max-width: 900px) {
