@@ -1,5 +1,14 @@
 // src/components/CommitDetailsModal.tsx
-import { TrendingDown, TrendingUp, Cpu, Zap, HardDrive, X } from "lucide-react";
+
+import {
+  TrendingDown,
+  TrendingUp,
+  Cpu,
+  Zap,
+  HardDrive,
+  X,
+} from "lucide-react";
+import { createPortal } from "react-dom";
 
 interface CommitDetailsModalProps {
   isOpen: boolean;
@@ -90,184 +99,181 @@ export function CommitDetailsModal({
 
   const scoreDifference =
     previousMetrics.carbonEmissions - currentMetrics.carbonEmissions;
+
   const isImprovement = scoreDifference > 0;
 
-  return (
-    <div className="eco-modal-overlay" onClick={onClose}>
-      <div
-        className="eco-modal"
-        onClick={(e) => e.stopPropagation()}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="commit-modal-title"
-      >
-        {/* Header */}
-        <div className="eco-modal-header">
+  const handleOverlayClick = () => {
+    onClose();
+  };
+
+  const handleModalClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
+
+  return createPortal(
+    <div className="eco-modal-overlay" onClick={handleOverlayClick}>
+      <div className="eco-modal" onClick={handleModalClick}>
+        {/* HEADER */}
+        <header className="eco-modal-header">
           <div>
-            <h2 id="commit-modal-title">Commit Comparison</h2>
-            <p className="eco-modal-subtitle">
-              Analyzing sustainability impact between commits
-            </p>
+            <h2>Commit Comparison</h2>
+            <p>Analyzing sustainability impact between commits</p>
           </div>
           <button
             className="eco-modal-close"
-            aria-label="Close"
             onClick={onClose}
+            aria-label="Close commit comparison"
           >
             <X size={18} />
           </button>
-        </div>
+        </header>
 
-        {/* Body */}
+        {/* BODY: two panels */}
         <div className="eco-modal-body">
-          {/* Previous Commit */}
-          <div className="eco-modal-column">
-            <div className="eco-modal-section-header">
-              <h3 className="eco-modal-title-before">Previous Commit</h3>
-              <code className="eco-modal-hash eco-modal-hash-before">
-                {previousCommitHash}
-              </code>
-            </div>
-
-            <div className="eco-code-card">
-              <div className="eco-code-scroll">
-                <pre className="eco-code-pre">
-                  <code>{previousCode}</code>
-                </pre>
+          {/* LEFT: previous commit */}
+          <section className="eco-modal-panel">
+            <div>
+              <div className="eco-modal-panel-title">Previous Commit</div>
+              <div style={{ marginTop: 6 }}>
+                <span className="eco-modal-hash">{previousCommitHash}</span>
               </div>
             </div>
 
-            <div className="eco-metrics">
-              <p className="eco-metrics-label">
+            <div className="eco-code-window">
+              <div className="eco-code-scroll">
+                <pre className="eco-code-block">{previousCode}</pre>
+              </div>
+            </div>
+
+            <div>
+              <div className="eco-metrics-title">
                 Sustainability Metrics (Before)
-              </p>
+              </div>
               <div className="eco-metrics-card eco-metrics-card--before">
-                <div className="eco-metrics-main eco-metrics-main--before">
-                  <div>
-                    <div className="eco-metrics-main-value eco-metrics-main-value--bad">
+                <div className="eco-metrics-main">
+                  <div className="eco-metrics-main-left">
+                    <span style={{ color: "#dc2626" }}>
                       +{previousMetrics.carbonEmissions}
-                      <TrendingUp className="eco-metrics-main-icon eco-metrics-main-icon--bad" />
-                    </div>
-                    <p className="eco-metrics-caption">
-                      Carbon emissions (gCO₂)
-                    </p>
+                    </span>
+                    <p>Carbon emissions (gCO₂)</p>
                   </div>
-                  <div className="eco-metrics-chip eco-metrics-chip--bad">
+                  <div className="eco-metrics-tag eco-metrics-tag--danger">
                     High Impact
                   </div>
                 </div>
 
                 <div className="eco-metrics-grid">
-                  <div className="eco-metrics-mini eco-metrics-mini--warn">
-                    <div className="eco-metrics-mini-header">
-                      <HardDrive className="eco-metrics-mini-icon eco-metrics-mini-icon--warn" />
+                  <div className="eco-metric-pill eco-metric-pill--warm">
+                    <div className="eco-metric-pill-label">
+                      <HardDrive size={13} />
                       <span>RAM Power</span>
                     </div>
-                    <p>{previousMetrics.ramPower}W</p>
+                    <div>{previousMetrics.ramPower}W</div>
                   </div>
 
-                  <div className="eco-metrics-mini eco-metrics-mini--warn">
-                    <div className="eco-metrics-mini-header">
-                      <Cpu className="eco-metrics-mini-icon eco-metrics-mini-icon--warn" />
+                  <div className="eco-metric-pill eco-metric-pill--warm">
+                    <div className="eco-metric-pill-label">
+                      <Cpu size={13} />
                       <span>CPU Power</span>
                     </div>
-                    <p>{previousMetrics.cpuPower}W</p>
+                    <div>{previousMetrics.cpuPower}W</div>
                   </div>
 
-                  <div className="eco-metrics-mini eco-metrics-mini--warn">
-                    <div className="eco-metrics-mini-header">
-                      <Zap className="eco-metrics-mini-icon eco-metrics-mini-icon--warn" />
+                  <div className="eco-metric-pill eco-metric-pill--warm">
+                    <div className="eco-metric-pill-label">
+                      <Zap size={13} />
                       <span>Total Energy</span>
                     </div>
-                    <p>{previousMetrics.totalElectricity}Wh</p>
+                    <div>{previousMetrics.totalElectricity}Wh</div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </section>
 
-          {/* Divider */}
+          {/* divider */}
           <div className="eco-modal-divider" />
 
-          {/* Current Commit */}
-          <div className="eco-modal-column">
-            <div className="eco-modal-section-header">
-              <h3 className="eco-modal-title-after">Current Commit</h3>
-              <code className="eco-modal-hash eco-modal-hash-after">
-                {commitHash}
-              </code>
-            </div>
-
-            <div className="eco-code-card">
-              <div className="eco-code-scroll">
-                <pre className="eco-code-pre">
-                  <code>{currentCode}</code>
-                </pre>
+          {/* RIGHT: current commit */}
+          <section className="eco-modal-panel">
+            <div>
+              <div className="eco-modal-panel-title">Current Commit</div>
+              <div style={{ marginTop: 6 }}>
+                <span className="eco-modal-hash">{commitHash}</span>
               </div>
             </div>
 
-            <div className="eco-metrics">
-              <p className="eco-metrics-label">Sustainability Metrics (After)</p>
+            <div className="eco-code-window">
+              <div className="eco-code-scroll">
+                <pre className="eco-code-block">{currentCode}</pre>
+              </div>
+            </div>
+
+            <div>
+              <div className="eco-metrics-title">
+                Sustainability Metrics (After)
+              </div>
               <div className="eco-metrics-card eco-metrics-card--after">
-                <div className="eco-metrics-main eco-metrics-main--after">
-                  <div>
-                    <div className="eco-metrics-main-value eco-metrics-main-value--good">
+                <div className="eco-metrics-main">
+                  <div className="eco-metrics-main-left">
+                    <span style={{ color: "#059669" }}>
                       {currentMetrics.carbonEmissions}
-                      <TrendingDown className="eco-metrics-main-icon eco-metrics-main-icon--good" />
-                    </div>
-                    <p className="eco-metrics-caption">
-                      Carbon emissions (gCO₂)
-                    </p>
+                    </span>
+                    <p>Carbon emissions (gCO₂)</p>
                   </div>
-                  <div className="eco-metrics-chip eco-metrics-chip--good">
+                  <div className="eco-metrics-tag eco-metrics-tag--success">
                     Optimized
                   </div>
                 </div>
 
                 <div className="eco-metrics-grid">
-                  <div className="eco-metrics-mini eco-metrics-mini--good">
-                    <div className="eco-metrics-mini-header">
-                      <HardDrive className="eco-metrics-mini-icon eco-metrics-mini-icon--good" />
+                  <div className="eco-metric-pill eco-metric-pill--cool">
+                    <div className="eco-metric-pill-label">
+                      <HardDrive size={13} />
                       <span>RAM Power</span>
                     </div>
-                    <p>{currentMetrics.ramPower}W</p>
+                    <div>{currentMetrics.ramPower}W</div>
                   </div>
 
-                  <div className="eco-metrics-mini eco-metrics-mini--good">
-                    <div className="eco-metrics-mini-header">
-                      <Cpu className="eco-metrics-mini-icon eco-metrics-mini-icon--good" />
+                  <div className="eco-metric-pill eco-metric-pill--cool">
+                    <div className="eco-metric-pill-label">
+                      <Cpu size={13} />
                       <span>CPU Power</span>
                     </div>
-                    <p>{currentMetrics.cpuPower}W</p>
+                    <div>{currentMetrics.cpuPower}W</div>
                   </div>
 
-                  <div className="eco-metrics-mini eco-metrics-mini--good">
-                    <div className="eco-metrics-mini-header">
-                      <Zap className="eco-metrics-mini-icon eco-metrics-mini-icon--good" />
+                  <div className="eco-metric-pill eco-metric-pill--cool">
+                    <div className="eco-metric-pill-label">
+                      <Zap size={13} />
                       <span>Total Energy</span>
                     </div>
-                    <p>{currentMetrics.totalElectricity}Wh</p>
+                    <div>{currentMetrics.totalElectricity}Wh</div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </section>
         </div>
 
-        {/* Footer */}
-        <div className="eco-modal-footer">
-          <span className="eco-modal-footer-label">
-            Total Carbon Reduction:
-          </span>
-          <div className="eco-modal-footer-pill">
-            <TrendingDown size={16} />
-            <span>
-              {Math.abs(scoreDifference)} gCO₂{" "}
-              {isImprovement ? "saved" : "added"}
-            </span>
+        {/* FOOTER */}
+        <footer className="eco-modal-footer">
+          <div className="eco-modal-footer-chip">
+            {isImprovement ? (
+              <>
+                <TrendingDown size={16} />
+                <span>{Math.abs(scoreDifference)} gCO₂ saved</span>
+              </>
+            ) : (
+              <>
+                <TrendingUp size={16} />
+                <span>{Math.abs(scoreDifference)} gCO₂ increase</span>
+              </>
+            )}
           </div>
-        </div>
+        </footer>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
