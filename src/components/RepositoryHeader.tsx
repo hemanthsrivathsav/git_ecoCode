@@ -38,11 +38,7 @@ export function RepositoryHeader() {
           </button>
           <button className="eco-btn-secondary">
             <Eye size={15} />
-            Watch
-          </button>
-          <button className="eco-btn-secondary">
-            <GitFork size={15} />
-            Fork
+            Watching
           </button>
         </div>
       </div>
